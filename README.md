@@ -1,0 +1,2 @@
+# lojadaaldeia-admin
+lojadaaldeia-admin
