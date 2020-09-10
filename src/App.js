@@ -7,6 +7,7 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import { Switch, Route } from 'react-router-dom'
 
 import Home from './pages/Home'
+import Dashboard from './pages/Dashboard'
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function Routes() {
   return (
   <Switch>
       <Route path="/" exact component={Home} />
+      <Route path="/dash" exact component={Dashboard} />
     </Switch>
   )}
 
