@@ -2,7 +2,7 @@ import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-import React, { Fragment, useRef } from "react";
+import React, { createContext, forwardRef, Fragment, useImperativeHandle, useState, useRef } from "react";
 import { getDateToString } from '../commons/utils';
 import { ItemsTable } from '../components/tables/Tables';
 import { getFromRemote } from '../remote/Utils';
@@ -70,15 +70,20 @@ const columns = [
   ];
 
 
-  const TableItemsBody = ({columns,edit}) => {
+  const TableItemsBody = forwardRef(({columns,edit}, ref) => {
 
     const [formState, setFormState ] = React.useState()
     const [selected, setSelected ] = React.useState()
+
+
+    useImperativeHandle(ref, () => {
+      return {
+          reload: () =>   load()
+    }});
+
   
     React.useEffect(() => {
-
       load()
-
      },[])
 
      const load = () =>{
@@ -95,7 +100,6 @@ const columns = [
 
      }
   
-
      const onClick = (user) =>{  
       setSelected(user.Username)
       edit(user)
@@ -105,8 +109,7 @@ const columns = [
        return  username === selected ? 'darkgray' : 'white'
      } 
   
-  
-  
+
     return (
       <React.Fragment>    
         {formState && formState.Users ? (formState.Users.map(row =>
@@ -125,7 +128,7 @@ const columns = [
           </TableRow> ))) : ''}
         </React.Fragment>    
     )
-  }
+  })
   
 
   
@@ -133,6 +136,7 @@ const columns = [
   export const CognitoUsers = (props) => {
 
     const childRef = useRef();
+    const tabledRef = useRef();
     
     const error = (error) => {  
       console.log(error)
@@ -145,7 +149,7 @@ const columns = [
   
     const reload = (children) => {  
       console.log('edit',children)
-      childRef.current.setChildren(children)
+      tabledRef.current.reload()
   
     }
 
@@ -161,7 +165,7 @@ const columns = [
       </Container>
       </Fragment>
 
-      <ItemsTable columns={columns} tableBody={<TableItemsBody columns={columns}  edit={edit} error={error}  />}    />
+      <ItemsTable columns={columns} tableBody={<TableItemsBody columns={columns} edit={edit} error={error} ref={tabledRef}  />}    />
       </Paper>
       <UserInfoComponent api='backoffice' service="users"  ref={childRef}  />
       </Fragment>
