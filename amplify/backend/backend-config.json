@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "lojadaaldeiaclientesee503c98": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

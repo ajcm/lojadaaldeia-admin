@@ -18,13 +18,12 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
+import Button from '@material-ui/core/Button';
 import { mainListItems, secondaryListItems } from '../components/listItems';
+import { Auth } from 'aws-amplify';
+import { useHistory } from 'react-router-dom';
 
-import Deposits from './Deposits';
-import Orders from './Orders';
-import MenuDrawer from '../components/MenuDrawer';
-import AppToolBar from '../components/AppToolBar';
-import Footer from '../components/Footer';
+
 
 const drawerWidth = 240;
 
@@ -114,38 +113,61 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const history = useHistory();
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
   const handleDrawerClose = () => {
     setOpen(false);
   };
+
+  const doLogout =  async () => {
+    console.log('logout.')
+    await Auth.signOut();
+  
+
+  }
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
-    <div className={classes.root}>
-      <CssBaseline />
-      <AppToolBar />
+    
+      <AppBar
+        position="absolute"
+        className={clsx(classes.appBar, open && classes.appBarShift)}
+      >
 
-      <MenuDrawer/>
+        <Toolbar className={classes.toolbar}>
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            className={clsx(
+              classes.menuButton,
+              open && classes.menuButtonHidden,
+            )}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography
+            component="h1"
+            variant="h6"
+            color="inherit"
+            noWrap
+            className={classes.title}
+          >
+            Dashboard
+          </Typography>
+          <IconButton color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <NotificationsIcon />
+            </Badge>
+          </IconButton>
+            <Button variant="outlined" color="inherit" onClick={() => doLogout()}>Logout</Button>
+        </Toolbar>
+      </AppBar>
 
-      <main className={classes.content}>
-        <div className={classes.appBarSpacer} />
-        <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
-           
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders />
-              </Paper>
-            </Grid>
-          </Grid>
-          <Box pt={4}>
-            <Footer />
-          </Box>
-        </Container>
-      </main>
-    </div>
+    
   );
 }

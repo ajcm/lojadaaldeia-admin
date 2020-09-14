@@ -10,20 +10,23 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import LayersIcon from '@material-ui/icons/Layers';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 
+
 export const mainListItems = (
   <div>
-    <ListItem button>
+    <ListItem button  >    
       <ListItemIcon>
-        <DashboardIcon />
+        <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <ListItemText primary="Users" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <ShoppingCartIcon />
       </ListItemIcon>
       <ListItemText primary="Orders" />
     </ListItem>
+
     <ListItem button>
       <ListItemIcon>
         <PeopleIcon />
