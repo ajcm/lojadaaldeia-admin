@@ -1,14 +1,14 @@
 import { API  } from 'aws-amplify';
 
-export const getFromRemote = (api,section,callback) =>{
-    API.get(api, section, {})
+export const getFromRemote = (api,service,callback) =>{
+    API.get(api, service, {})
     .then(response => callback(null,response))
     .catch(error => callback(error)) 
 }
   
   
-export const postToRemote = (api,section,data,callback) =>{
-    API.post(api, section,data,{})
+const postToRemote = (api,service,data,callback) =>{
+    API.post(api, service,data,{})
     .then(response => callback ? callback(null,response) : '' )
     .catch(error => callback ? callback(error) : '') 
 }

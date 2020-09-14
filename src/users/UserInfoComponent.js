@@ -1,16 +1,8 @@
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { createContext, forwardRef, Fragment, useImperativeHandle, useRef, useState } from "react";
-
-
-import TableCell from '@material-ui/core/TableCell';
-import TableRow from '@material-ui/core/TableRow';
-
-import { ItemsTable } from '../components/tables/Tables';
-import { getFromRemote } from '../remote/Utils';
-
-
-import {getDateToString} from '../commons/utils'
+import React, { createContext, forwardRef, Fragment, useImperativeHandle, useState } from "react";
+import Button from '@material-ui/core/Button';
+import { postTo } from '../remote/Utils';
 
 
 const useStyles = makeStyles({
@@ -24,6 +16,7 @@ const useStyles = makeStyles({
     paddingTop: '10px',
     paddingBottom: '10px',
     paddingLeft: '10px',
+    marginTop: '10px',
  //   minHeight: '90vh'
 
   },
@@ -72,16 +65,33 @@ export const UserInfoComponent =  forwardRef((props, ref) => {
       return {
           setChildren: (obj) =>   setFormState(obj)
     }});
+
+    const deleteUser = (username) => {
+        const action = 'deleteUser'
+        postTo('admin','users/action',{action,username},(error, response) => {
+            if (error){
+                alert(error)
+                return
+            }
+
+         alert('OK')
+        })
+    }
   
     return (
-      <Fragment> 
+    <Fragment> 
+        
+    {formState ?
       <Paper className={classes.paper}>
       <FormContext.Provider value={context}>            
-        <p>{formState ? formState.Username : ''}</p>
+        <p>Username: {formState ? formState.Username : ''}</p>
+        <p>Email: {formState ? formState.Username : ''}</p>
+        <Button onClick={() => deleteUser(formState.Username)} color="primary">Delete</Button>
         
       </FormContext.Provider>
       </Paper> 
-      </Fragment>
+    : ''}
+    </Fragment>
       )
   })
   

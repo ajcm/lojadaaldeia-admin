@@ -1,18 +1,14 @@
 import Paper from '@material-ui/core/Paper';
 import { makeStyles } from '@material-ui/core/styles';
-import React, { createContext, forwardRef, Fragment, useImperativeHandle, useRef, useState } from "react";
-
-
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
-
+import React, { Fragment, useRef } from "react";
+import { getDateToString } from '../commons/utils';
 import { ItemsTable } from '../components/tables/Tables';
 import { getFromRemote } from '../remote/Utils';
-
-
-import {getDateToString} from '../commons/utils'
-import {UserInfoComponent} from './UserInfoComponent'
-
+import { UserInfoComponent } from './UserInfoComponent';
+import Button from '@material-ui/core/Button';
+import { Container } from '@material-ui/core';
 
 const useStyles = makeStyles({
   root: {
@@ -77,26 +73,44 @@ const columns = [
   const TableItemsBody = ({columns,edit}) => {
 
     const [formState, setFormState ] = React.useState()
+    const [selected, setSelected ] = React.useState()
   
     React.useEffect(() => {
-       getFromRemote('admin','users/cognitoUsers',(error,response) => {
-         if(error){
-           console.log(error)
-           return
-         }
-  
-         if (response ) {
-           setFormState(response)
-         }               
-       })
+
+      load()
+
      },[])
+
+     const load = () =>{
+      getFromRemote('admin','users/cognitoUsers',(error,response) => {
+        if(error){
+          console.log(error)
+          return
+        }
+ 
+        if (response ) {
+          setFormState(response)
+        }               
+      })
+
+     }
+  
+
+     const onClick = (user) =>{  
+      setSelected(user.Username)
+      edit(user)
+     } 
+
+     const getBackground = (username) =>{
+       return  username === selected ? 'darkgray' : 'white'
+     } 
   
   
   
     return (
       <React.Fragment>    
         {formState && formState.Users ? (formState.Users.map(row =>
-            (<TableRow hover role="checkbox" tabIndex={-1} key={row.code} onClick={() => edit(row)}  >
+            (<TableRow hover role="checkbox" tabIndex={-1} key={row.code} onClick={() => onClick(row)} style={{backgroundColor:getBackground(row.Username)}}  >
                   {columns.map((column) => {
   
                     const value =  column.getValue ? column.getValue(row[column.id]) : row[column.id]
@@ -122,20 +136,33 @@ const columns = [
     
     const error = (error) => {  
       console.log(error)
-
     }
 
     const edit = (children) => {  
       console.log('edit',children)
       childRef.current.setChildren(children)
-  
     }
   
+    const reload = (children) => {  
+      console.log('edit',children)
+      childRef.current.setChildren(children)
+  
+    }
 
   
     return (
     <Fragment>
+      <Paper>
+      <Fragment>
+      <Container style={{flex:1, textAlign: "right"}}>
+
+      <Button  style={{marginTop: '10px', marginLeft: '5px'}}  color="primary"  onClick={() => reload()} >Reload</Button>
+
+      </Container>
+      </Fragment>
+
       <ItemsTable columns={columns} tableBody={<TableItemsBody columns={columns}  edit={edit} error={error}  />}    />
+      </Paper>
       <UserInfoComponent api='backoffice' service="users"  ref={childRef}  />
       </Fragment>
     )
