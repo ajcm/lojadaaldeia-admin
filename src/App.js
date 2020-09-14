@@ -83,8 +83,8 @@ Amplify.configure({
         },
         {
           name: "admin",
-          endpoint: "https://w41xifld4j.execute-api.eu-west-1.amazonaws.com/Prod/",          
-         //endpoint: 'http://192.168.1.2:3000/',
+         // endpoint: "https://w41xifld4j.execute-api.eu-west-1.amazonaws.com/Prod/",          
+         endpoint: 'http://192.168.1.2:3000/',
           custom_header: async () => {         
              return { Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
           }
