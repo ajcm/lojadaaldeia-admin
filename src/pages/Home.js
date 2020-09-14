@@ -27,8 +27,7 @@ export default function Orders() {
 
 
  const UserWelcome = ({api,service}) =>  {  
-    const [formState, setFormState ] = React.useState()
-
+   const [formState, setFormState ] = React.useState()
 
    React.useEffect(() => {
       getFromRemote('admin','id/details',(error,response) => {
@@ -45,12 +44,7 @@ export default function Orders() {
           state['roles'] = roles ? processRoles(roles) : ''
 
           setFormState(state)
-
-
-        }
-
-       
-        
+        }               
       })
     },[])
   

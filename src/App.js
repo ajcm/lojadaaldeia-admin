@@ -1,26 +1,16 @@
-import React, { useState } from 'react';
-import { CommonLoading } from 'react-loading'
-import theme from './theme';
-import { BrowserRouter } from 'react-router-dom';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { Switch, Route } from 'react-router-dom'
-import Amplify from "aws-amplify";
-import awsExports from "./aws-exports";
-import { withAuthenticator, AmplifySignOut } from '@aws-amplify/ui-react';
+import Amplify, { Auth } from "aws-amplify";
+import React, { useState } from 'react';
+import { CommonLoading } from 'react-loading';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { AppContext } from '../src/context/AppContext';
-import {  Auth  } from 'aws-amplify';
-
-import Template from './pages/Template'
-
-import Home from './pages/Home'
-import Dashboard from './pages/Dashboard'
-import Users from './pages/Users'
-import Orders from './pages/Orders'
-
-import WithAuth from './auth/WithAuth'
-
-//Amplify.configure(awsExports);
+import WithAuth from './auth/WithAuth';
+import Home from './pages/Home';
+import Orders from './pages/Orders';
+import Template from './pages/Template';
+import Users from './pages/Users';
+import theme from './theme';
 
 
 const App = (props) => {
@@ -94,6 +84,7 @@ Amplify.configure({
         {
           name: "admin",
           endpoint: "https://w41xifld4j.execute-api.eu-west-1.amazonaws.com/Prod/",          
+         //endpoint: 'http://192.168.1.2:3000/',
           custom_header: async () => {         
              return { Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
           }

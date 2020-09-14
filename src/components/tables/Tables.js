@@ -6,6 +6,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TableBody from '@material-ui/core/TableBody';
 import React, { Fragment, useContext } from 'react';
 
 const useStyles = makeStyles({
@@ -43,7 +44,7 @@ const useStyles = makeStyles({
 
 
 
-  export const ItemsTable = ({columns}) => {
+  export const ItemsTable = ({columns,tableBody}) => {
     const classes = useStyles();
  
     return (
@@ -64,6 +65,9 @@ const useStyles = makeStyles({
             </TableRow>
           </TableHead>
 
+          <TableBody>   
+          {tableBody}
+          </TableBody>
 
         </Table>
       </TableContainer>
@@ -93,29 +97,6 @@ const useStyles = makeStyles({
         </Fragment>    
     )
 }
-
-
-
- 
-  const PageFilter = (props) => {
-    const classes = useStyles();
-    const {formContext,next,previous,load,reset} = props
-   
-    const context =  useContext(formContext) 
-    const {formState, setFormState } = context
-      
-    return (
-
-      <Fragment>
-      <Container style={{flex:1, textAlign: "right"}}>
-      <Button  style={{marginTop: '10px', marginLeft: '5px'}} variant="contained" color="" onClick={() => load()} >Todos</Button> 
-      <Button  style={{marginTop: '10px', marginLeft: '5px'}} variant="contained" color=""  onClick={() => reset()} >Reload</Button>
-
-      </Container>
-      </Fragment>
-    )
-
-  }
 
 
   
