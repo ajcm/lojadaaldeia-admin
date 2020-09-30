@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-lojadaaldeiastore-dev-163118-authRole",
+      "UnauthRoleArn": "arn:aws:iam::042746780522:role/amplify-lojadaaldeiastore-dev-163118-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::042746780522:role/amplify-lojadaaldeiastore-dev-163118-authRole",
+      "Region": "eu-west-1",
+      "DeploymentBucketName": "amplify-lojadaaldeiastore-dev-163118-deployment",
+      "UnauthRoleName": "amplify-lojadaaldeiastore-dev-163118-unauthRole",
+      "StackName": "amplify-lojadaaldeiastore-dev-163118",
+      "StackId": "arn:aws:cloudformation:eu-west-1:042746780522:stack/amplify-lojadaaldeiastore-dev-163118/fcfb98c0-0331-11eb-9be0-06fe77e63de4",
+      "AmplifyAppId": "d95un65dq3r2v"
+    },
+    "categories": {
+      "auth": {
+        "lda": {}
+      }
+    }
+  }
+}

@@ -62,14 +62,21 @@ const Routes = () => {
   )}
   
 
+  /*
+
+  "aws_project_region": "eu-west-1",
+    "aws_cognito_identity_pool_id": "eu-west-1:f78d17ff-a118-4bef-afb7-fbecd8683e34",
+    "aws_cognito_region": "eu-west-1",
+    "aws_user_pools_id": "eu-west-1_hDu682t9h",
+    "aws_user_pools_web_client_id": "329fi5m2bpu49pbt192he7144a",*/
 
 Amplify.configure({
   
   Auth: {
-      identityPoolId: "eu-west-1:a641ea8c-2711-4969-99f4-e7b580ec37ce",
+      identityPoolId: "eu-west-1:f78d17ff-a118-4bef-afb7-fbecd8683e34",
       region: 'eu-west-1', 
-      userPoolId: "eu-west-1_PDwzvgU8R",
-      userPoolWebClientId: '7lt540lutmt0jcs9btq11g2f58',
+      userPoolId: "eu-west-1_hDu682t9h",
+      userPoolWebClientId: '329fi5m2bpu49pbt192he7144a',
   },
   API: {
       endpoints: [
