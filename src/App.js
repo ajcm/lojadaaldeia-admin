@@ -68,8 +68,8 @@ Amplify.configure({
   Auth: {
       identityPoolId: "eu-west-1:a641ea8c-2711-4969-99f4-e7b580ec37ce",
       region: 'eu-west-1', 
-      userPoolId: "eu-west-1_T2DookXqW",
-      userPoolWebClientId: '4ce0bdreaco1fqqdbndkmrq8jf',
+      userPoolId: "eu-west-1_PDwzvgU8R",
+      userPoolWebClientId: '7lt540lutmt0jcs9btq11g2f58',
   },
   API: {
       endpoints: [
