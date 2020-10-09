@@ -87,7 +87,7 @@ const columns = [
      },[])
 
      const load = () =>{
-      getFromRemote('admin','users/cognitoUsers',(error,response) => {
+      getFromRemote('admin-api','admin/users/cognitoUsers',(error,response) => {
         if(error){
           console.log(error)
           return

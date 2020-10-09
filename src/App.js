@@ -73,7 +73,6 @@ const Routes = () => {
 Amplify.configure({
   
   Auth: {
-      identityPoolId: "eu-west-1:f78d17ff-a118-4bef-afb7-fbecd8683e34",
       region: 'eu-west-1', 
       userPoolId: "eu-west-1_hDu682t9h",
       userPoolWebClientId: '329fi5m2bpu49pbt192he7144a',
@@ -82,20 +81,13 @@ Amplify.configure({
       endpoints: [
         
         {
-          name: "users",
-          endpoint: "https://734cvipkkh.execute-api.eu-west-1.amazonaws.com/Prod/",          
+          name: "admin-api",
+          endpoint: "https://api.lojadaaldeia.pt/admin/",          
+          //endpoint: 'http://192.168.1.6:3000/',        
           custom_header: async () => {         
              return { Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
           }
-        },
-        {
-          name: "admin",
-          endpoint: "https://w41xifld4j.execute-api.eu-west-1.amazonaws.com/Prod/",          
-         //endpoint: 'http://192.168.1.8:3000/',
-          custom_header: async () => {         
-             return { Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
-          }
-        },
+        },    
        
   ]
   }
