@@ -82,7 +82,7 @@ Amplify.configure({
         
         {
           name: "admin-api",
-          endpoint: "https://api.lojadaaldeia.pt/",          
+          endpoint: "https://api.lojadaaldeia.pt/admin/",          
          // endpoint: 'http://192.168.1.6:8080/',        
           custom_header: async () => {         
              return { Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
