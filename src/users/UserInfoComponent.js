@@ -67,8 +67,8 @@ export const UserInfoComponent =  forwardRef((props, ref) => {
     }});
 
     const deleteUser = (username) => {
-        const action = 'deleteUser'
-        postTo('admin','users/action',{action,username},(error, response) => {
+        //const action = 'deleteUser'
+        postTo('admin-api','admin/users/deleteUser',{username},(error, response) => {
             if (error){
                 alert(error)
                 return

@@ -167,7 +167,7 @@ const columns = [
 
       <ItemsTable columns={columns} tableBody={<TableItemsBody columns={columns} edit={edit} error={error} ref={tabledRef}  />}    />
       </Paper>
-      <UserInfoComponent api='backoffice' service="users"  ref={childRef}  />
+      <UserInfoComponent ref={childRef}  />
       </Fragment>
     )
   
