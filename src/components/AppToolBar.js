@@ -125,9 +125,9 @@ export default function Dashboard() {
   const doLogout =  async () => {
     console.log('logout.')
     await Auth.signOut();
-  
-
   }
+
+  
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
@@ -159,11 +159,7 @@ export default function Dashboard() {
           >
             Dashboard
           </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
+          
             <Button variant="outlined" color="inherit" onClick={() => doLogout()}>Logout</Button>
         </Toolbar>
       </AppBar>
