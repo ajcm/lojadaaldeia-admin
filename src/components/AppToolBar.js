@@ -22,7 +22,7 @@ import Button from '@material-ui/core/Button';
 import { mainListItems, secondaryListItems } from '../components/listItems';
 import { Auth } from 'aws-amplify';
 import { useHistory } from 'react-router-dom';
-
+import { AppContext } from '../context/AppContext';
 
 
 const drawerWidth = 240;
@@ -112,14 +112,17 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+
+  const {session,setSession,user,setUser,menuOpen, setMenuOpen} = React.useContext(AppContext);
+  //const [open, setOpen] = React.useState(true);
+
   const history = useHistory();
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setMenuOpen(true);
   };
   const handleDrawerClose = () => {
-    setOpen(false);
+    setMenuOpen(false);
   };
 
   const doLogout =  async () => {
@@ -127,14 +130,14 @@ export default function Dashboard() {
     await Auth.signOut();
   }
 
-  
+
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     
       <AppBar
         position="absolute"
-        className={clsx(classes.appBar, open && classes.appBarShift)}
+        className={clsx(classes.appBar, menuOpen && classes.appBarShift)}
       >
 
         <Toolbar className={classes.toolbar}>
@@ -145,7 +148,7 @@ export default function Dashboard() {
             onClick={handleDrawerOpen}
             className={clsx(
               classes.menuButton,
-              open && classes.menuButtonHidden,
+              menuOpen && classes.menuButtonHidden,
             )}
           >
             <MenuIcon />

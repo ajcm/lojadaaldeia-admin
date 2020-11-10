@@ -1,7 +1,12 @@
 import { makeStyles } from '@material-ui/core/styles';
 import * as React from 'react';
 import Title from './Title';
-import UserWelcome from '../components/UserWelcome'
+import CmsTabs from '../cms/CmsTabs'
+
+// Generate Order Data
+function createData(id, date, name, shipTo, paymentMethod, amount) {
+  return { id, date, name, shipTo, paymentMethod, amount };
+}
 
 
 function preventDefault(event) {
@@ -18,11 +23,7 @@ export default function Orders() {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Home</Title>
-      <UserWelcome api='api' service='identity/details' />
+      <CmsTabs/>
     </React.Fragment>
   );
 }
-
-
-   

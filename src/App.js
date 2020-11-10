@@ -10,6 +10,9 @@ import Home from './pages/Home';
 import Orders from './pages/Orders';
 import Template from './pages/Template';
 import Users from './pages/Users';
+import Cms from './pages/Cms';
+import Content from './pages/Content';
+
 import theme from './theme';
 
 
@@ -17,13 +20,14 @@ const App = (props) => {
 
   const [session, setSession] = useState();
   const [user, setUser] = useState();
+  const [menuOpen, setMenuOpen] = useState(true);
 
 
   if (props.isLoading) {
     return <CommonLoading />;
 } else {
   return (
-    <AppContext.Provider value={{session,setSession,user,setUser}}>
+    <AppContext.Provider value={{session,setSession,user,setUser,menuOpen,setMenuOpen}}>
     <ThemeProvider theme={theme}>
     <CssBaseline />        
     <WithAuth>
@@ -41,6 +45,7 @@ const App = (props) => {
 const Routes = () => {
   return (
   <Switch>
+
      <Route path="/" exact >
         <Template><Home/></Template>
       </Route>
@@ -57,6 +62,14 @@ const Routes = () => {
         <Template><Orders/></Template>
       </Route>
 
+      
+      <Route path="/cms" exact >
+        <Template><Cms/></Template>
+      </Route>
+
+      <Route path="/content/details/:guid" exact>
+        <Template><Content/></Template>
+      </Route>
 
     </Switch>
   )}
@@ -78,15 +91,19 @@ Amplify.configure({
       userPoolWebClientId: '329fi5m2bpu49pbt192he7144a',
   },
   API: {
-      endpoints: [
-        
+      endpoints: [        
         {
-          name: "admin-api",
-          endpoint: "https://api.lojadaaldeia.pt/admin/",          
-         // endpoint: 'http://192.168.1.6:8080/',        
+          name: "api",
+          endpoint: "https://api.techtuga.net/cms/",                
           custom_header: async () => {         
              return { Authorization: `${(await Auth.currentSession()).getAccessToken().getJwtToken()}` }
           }
+        },  
+        {
+          name: "CMS-API",
+          //endpoint: "https://api.techtuga.net/cms/",
+          endpoint: "http://localhost:8080/content/",                 
+        
         },    
        
   ]

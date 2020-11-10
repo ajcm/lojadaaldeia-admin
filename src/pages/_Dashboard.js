@@ -20,7 +20,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from '../components/listItems';
 
-import Deposits from './Deposits';
+import Deposits from './_Deposits';
 import Orders from './Orders';
 import MenuDrawer from '../components/MenuDrawer';
 import AppToolBar from '../components/AppToolBar';
@@ -114,6 +114,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  
   const handleDrawerOpen = () => {
     setOpen(true);
   };

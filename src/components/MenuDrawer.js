@@ -1,36 +1,19 @@
-import * as React from 'react';
-import clsx from 'clsx';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
+import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
-import Container from '@material-ui/core/Container';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-
+import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import DashboardIcon from '@material-ui/icons/Dashboard';
-import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { makeStyles } from '@material-ui/core/styles';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import PeopleIcon from '@material-ui/icons/People';
-import BarChartIcon from '@material-ui/icons/BarChart';
-import LayersIcon from '@material-ui/icons/Layers';
-import AssignmentIcon from '@material-ui/icons/Assignment';
-
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import clsx from 'clsx';
+import * as React from 'react';
 import { useHistory } from 'react-router-dom';
+import { AppContext } from '../context/AppContext';
+
 
 const drawerWidth = 240;
 
@@ -119,15 +102,16 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Dashboard() {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const {session,setSession,user,setUser,menuOpen, setMenuOpen} = React.useContext(AppContext);
+  
   const history = useHistory();
 
   const handleDrawerOpen = () => {
-    setOpen(true);
+    setMenuOpen(true);
   };
 
   const handleDrawerClose = () => {
-    setOpen(false);
+    setMenuOpen(false);
   };
 
 
@@ -141,9 +125,9 @@ export default function Dashboard() {
       <Drawer
         variant="permanent"
         classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+          paper: clsx(classes.drawerPaper, !menuOpen && classes.drawerPaperClose),
         }}
-        open={open}
+        open={menuOpen}
       >
         <div className={classes.toolbarIcon}>
           <IconButton onClick={handleDrawerClose}>
@@ -168,11 +152,11 @@ export default function Dashboard() {
             <ListItemText primary="Users" />
           </ListItem>
 
-          <ListItem button onClick={() => redirect('/orders')}>
+          <ListItem button onClick={() => redirect('/cms')}>
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary="Orders" />
+            <ListItemText primary="CMS" />
           </ListItem>
 
          
